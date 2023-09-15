@@ -59,11 +59,13 @@ app.get('/employees', (req, res) => {
       res.send(data.rows); 
     }
   });
-});
+})
 
 
-  app.get('/employees/:id', (req, res) => {
-    let empCode = +req.params.id;
+
+
+  app.get('/employees/:empCode', (req, res) => {
+    let empCode = +req.params.empCode;
   
     const sql = 'SELECT * FROM employees where empCode=$1';
     const params = [empCode];
@@ -132,7 +134,6 @@ app.get('/employees', (req, res) => {
   
 
   
-
   app.put('/employees/:empCode', (req, res) => {
     let empCode = +req.params.empCode;
     let body = req.body;
@@ -148,10 +149,9 @@ app.get('/employees', (req, res) => {
       }
     });
   });
-  
 
   app.delete('/employees/:empCode', (req, res) => {
-    let empCode=+req.params.empCode
+    let empCode=req.params.empCode
     const sql = 'delete from employees where empCode=$1';
     const params = [empCode];
     client.query(sql,params, (err, data) => {
