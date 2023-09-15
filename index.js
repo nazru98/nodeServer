@@ -30,40 +30,45 @@ app.listen(port,()=>console.log(`Listening on port ${port} !`))
 
 
 app.get('/employees', (req, res) => {
-  let departmentStr=req.query.department
-    let designationStr=req.query.designation
-    let genderStr=req.query.gender
-    // let connection=mysql.createConnection(connData);
-    let sql = 'SELECT * FROM employees where 1';
-    let params = [];
+  let departmentStr = req.query.department;
+  let designationStr = req.query.designation;
+  let genderStr = req.query.gender;
+
+  let sql = 'SELECT * FROM employees WHERE 1=1';
+  let params = [];
 
   if (departmentStr) {
-    sql += ' AND department = ?';
+    sql += ' AND department = $1';
     params.push(departmentStr);
   }
 
   if (designationStr) {
-    sql += ' AND designation = ?';
+    sql += ' AND designation = $2';
     params.push(designationStr);
   }
 
   if (genderStr) {
-    sql += ' AND gender = ?';
+    sql += ' AND gender = $3';
     params.push(genderStr);
   }
-  client.query(sql,params, (err, data) => {
-      if (err)  res.status(404).send( err);
-      res.send( data );
-    });
-  });
 
-  app.get('/employees', (req, res) => {
+  client.query(sql, params, (err, data) => {
+    if (err) {
+      res.status(500).send(err); 
+    } else {
+      res.send(data.rows); 
+    }
+  });
+});
+
+
+  app.get('/employees/:id', (req, res) => {
     let empCode = +req.params.id;
   
-    const sql = 'SELECT * FROM employees';
+    const sql = 'SELECT * FROM employees where empCode=$1';
+    const params = [empCode];
   
-  
-    client.query(sql, (err, data) => {
+    client.query(sql, params, (err, data) => {
       if (err) {
         res.status(404).send(err);
       } else {
@@ -76,36 +81,38 @@ app.get('/employees', (req, res) => {
 
   app.get('/employees/department/:department', (req, res) => {
     let department=req.params.department
-    // let connection=mysql.createConnection(connData);
-    const sql = 'SELECT * FROM employees where department=?';
-    client.query(sql,department, (err, data) => {
+    const sql = 'SELECT * FROM employees where department=$1';
+    const params = [department];
+    client.query(sql,params, (err, data) => {
       if (err)  res.status(404).send( err);
      else{
-      res.send( data );
+      res.send( data.rows );
      }
     });
   });
 
  app.get('/employees/designation/:designation', (req, res) => {
     let designation=req.params.designation
-    // let connection=mysql.createConnection(connData);
-    const sql = 'SELECT * FROM employees where designation=?';
-    client.query(sql,designation, (err, data) => {
+    const sql = 'SELECT * FROM employees where designation=$1';
+    const params = [designation];
+
+    client.query(sql,params, (err, data) => {
       if (err)  res.status(404).send( err);
      else{
-      res.send( data );
+      res.send( data.rows );
      }
     });
   });
 
   app.get('/employees/gender/:gender', (req, res) => {
     let gender=req.params.gender
-    // let connection=mysql.createConnection(connData);
-    const sql = 'SELECT * FROM employees where gender=?';
-    client.query(sql,gender, (err, data) => {
+    const sql = 'SELECT * FROM employees where gender=$1';
+    const params = [gender];
+
+    client.query(sql,params, (err, data) => {
       if (err)  res.status(404).send( err);
      else{
-      res.send( data );
+      res.send( data.rows );
      }
     });
   });
@@ -124,25 +131,30 @@ app.get('/employees', (req, res) => {
   });
   
 
-  app.put('/employees/:empCode', (req, res) => {
-    let empCode=+req.params.empCode
-    let body=req.body
-    // let connection=mysql.createConnection(connData);
-    const sql = 'update employees set name=?,department=?,designation=? ,salary=?,gender=? where empCode=?';
+  
 
-    client.query(sql,[body.name,body.department,body.designation,body.salary,body.gender,empCode], (err, data) => {
-      if (err)  res.status(404).send( err);
-     else{
-      res.send( data );
-     }
+  app.put('/employees/:empCode', (req, res) => {
+    let empCode = +req.params.empCode;
+    let body = req.body;
+    const sql = 'UPDATE employees SET name=$1, department=$2, designation=$3, salary=$4, gender=$5 WHERE empCode=$6';
+  
+    const params = [body.name, body.department, body.designation, body.salary, body.gender, empCode];
+  
+    client.query(sql, params, (err, data) => {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.send(data.rows);
+      }
     });
   });
+  
 
   app.delete('/employees/:empCode', (req, res) => {
     let empCode=+req.params.empCode
-    // let connection=mysql.createConnection(connData);
-    const sql = 'delete from employees where empCode=?';
-    client.query(sql,empCode, (err, data) => {
+    const sql = 'delete from employees where empCode=$1';
+    const params = [empCode];
+    client.query(sql,params, (err, data) => {
       if (err)  res.status(404).send( err);
      else{
       res.send( data );
