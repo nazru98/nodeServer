@@ -525,67 +525,71 @@ app.get('/employees', (req, res) => {
     });
 
   });
-app.get('/purchases', (req, res) => {
-  let shop = req.query.shop; 
-  let product = req.query.product;
-  let sort = req.query.sort;
-
-  let sql = `
-    SELECT purchases.*, shops.name, products.productname,products.category, products.description
-    FROM purchases
-    JOIN shops ON purchases.shopid = shops.shopid
-    JOIN products ON purchases.productid = products.productid
-  `;
+  app.get('/purchases', (req, res) => {
+    let shop = req.query.shop; 
+    let products = req.query.product;
+    let sort = req.query.sort;
   
-  const params = [];
-  const conditions = [];
-
-  if (shop) {
-    conditions.push('shops.name LIKE $' + (params.length + 1));
-    params.push('%' + shop + '%');
-  }
-
-  if (product) {
-    conditions.push('products.productname LIKE $' + (params.length + 1));
-    params.push('%' + product + '%');
-  }
+    let sql = `
+      SELECT purchases.*, shops.name, products.productname,products.category, products.description
+      FROM purchases
+      JOIN shops ON purchases.shopid = shops.shopid
+      JOIN products ON purchases.productid = products.productid
+    `;
+    
+    const params = [];
+    const conditions = [];
   
-  if (conditions.length > 0) {
-    sql += ' WHERE ' + conditions.join(' OR ');
-  }
-
-  if (sort) {
-    const sortOptions = sort.split(',');
-    const orderBy = sortOptions.map((option) => {
-      switch (option) {
-        case 'QtyAsc':
-          return 'quantity ASC';
-        case 'QtyDesc':
-          return 'quantity DESC';
-        case 'ValueAsc':
-          return 'price*quantity ASC';
-        case 'ValueDesc':
-          return '(price * quantity) DESC';
-        default:
-          return ''; 
+    if (shop) {
+      conditions.push('shops.name LIKE $' + (params.length + 1));
+      params.push('%' + shop + '%');
+    }
+  
+    if (products) {
+      const productNames = products.split(','); // Split products by comma
+      const productConditions = productNames.map((productName, index) => {
+        const paramIndex = params.length + 1;
+        params.push('%' + productName.trim() + '%'); // Trim and add to params
+        return `products.productname LIKE $${paramIndex}`;
+      });
+  
+      conditions.push('(' + productConditions.join(' OR ') + ')');
+    }
+    
+    if (conditions.length > 0) {
+      sql += ' WHERE ' + conditions.join(' AND ');
+    }
+  
+    if (sort) {
+      const sortOptions = sort.split(',');
+      const orderBy = sortOptions.map((option) => {
+        switch (option) {
+          case 'QtyAsc':
+            return 'quantity ASC';
+          case 'QtyDesc':
+            return 'quantity DESC';
+          case 'ValueAsc':
+            return 'price*quantity ASC';
+          case 'ValueDesc':
+            return '(price * quantity) DESC';
+          default:
+            return ''; 
+        }
+      });
+  
+      if (orderBy.length > 0) {
+        sql += ' ORDER BY ' + orderBy.join(', ');
+      }
+    }
+  
+    client.query(sql, params, (err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.send(data.rows);
       }
     });
-
-    if (orderBy.length > 0) {
-      sql += ' ORDER BY ' + orderBy.join(', ');
-    }
-  }
-
-  client.query(sql, params, (err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.send(data.rows);
-    }
   });
-});
-
-
  app.get('/totalPurchases/:id', (req, res) => {
   
     let id=req.params.id
