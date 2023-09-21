@@ -311,7 +311,6 @@ app.get('/employees', (req, res) => {
     });
 
 
-
     app.get('/shops', (req, res) => {  
       const sql = 'SELECT shopId,name FROM shops ';
       client.query(sql, (err, data) => {
