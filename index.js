@@ -312,303 +312,275 @@ app.get('/employees', (req, res) => {
 
 
 
-
     app.get('/shops', (req, res) => {  
-    const sql = 'SELECT shopId,name FROM shops ';
-    client.query(sql, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-        res.send(data.rows);
-      
-      }
-    });
-  });
- 
-
-  app.get('/shops/:id', (req, res) => {
-    let id = +req.params.id;
-  
-    const sql = 'SELECT * FROM shops where shopid=$1';
-    const params = [id];
-  
-    client.query(sql, params, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-        res.send(data.rows);
-      }
-    });
-  });
-  app.post('/shops', (req, res) => {
-    const body = req.body;
-    const sql = 'INSERT INTO shops ( name,rent) VALUES ($1, $2)';
-    const values = [ body.name, body.rent];
-  
-    client.query(sql, values, (err, data) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-      } else {
-        res.status(201).json({ message: 'Shop added successfully', data: data.rows });
-      }
-    });
-  });
-  app.get('/products', (req, res) => {  
-    const sql = 'SELECT * FROM products ';
-    client.query(sql, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-        res.send(data.rows);
-      }
-    });
-  });
-  app.get('/products/:id', (req, res) => {
-    let id = +req.params.id;
-  
-    const sql = 'SELECT * FROM products where productid=$1';
-    const params = [id];
-  
-    client.query(sql, params, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-        res.send(data.rows);
-      }
-    });
-  });
- 
-
-  app.post('/products', (req, res) => {
-    const body = req.body;
-    const sql = 'INSERT INTO products (productname, category, description) VALUES ($1, $2, $3)';
-    const values = [body.productname, body.category, body.description];
-  
-    client.query(sql, values, (err, data) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-      } else {
-        res.status(201).json({ message: 'Product added successfully', data: data.rows });
-      }
-    });
-  });
-  
-  app.put('/products/:productid', (req, res) => {
-    let productid = +req.params.productid;
-    let body = req.body;
-    const sql = 'UPDATE products SET  category=$1, description=$2, productname=$3 WHERE productid=$4';
-  
-    const params = [ body.category, body.description,body.productname,  productid];
-  
-    client.query(sql, params, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-        res.send(data.rows);
-      }
-    });
-  });
-
-  
-  app.get('/purchases/shops/:id', (req, res) => {
-  
-    let id=req.params.id
-    const sql = `SELECT s.name,s.shopid,  count(p.productid)  totalPurchases
-    FROM shops s
-    JOIN purchases p ON s.shopid = p.shopid
-    JOIN products pd ON pd.productid = p.productid 
-    WHERE pd.productid = ${id} group by s.shopid,s.name;
-    `;
-   
-    client.query(sql, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-       
-        res.send(data.rows);
-      }
-    });
-  });
-
-  app.get('/purchases/products/:id', (req, res) => {
-    let id = req.params.id;
-    const sql = `
-      SELECT p.productid, pd.productname AS productname, pd.category, pd.description, COUNT(p.productid) AS totalPurchases
-      FROM purchases p
-      JOIN products pd ON pd.productid = p.productid
-      WHERE pd.productid = ${id}
-      GROUP BY p.productid, pd.productname, pd.category, pd.description;
-    `;
-     
-    client.query(sql, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-        res.send(data.rows);
-      }
-    });
-  });
-  
-
-
-
-  app.post('/purchases', (req, res) => {
-    const body = req.body;
-    const sql = 'INSERT INTO purchases (shopid,productid, quantity, price) VALUES ($1, $2, $3,$4)';
-    const values = [body.shopid, body.productid, body.quantity, body.price];
-  
-    client.query(sql, values, (err, data) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-      } else {
-        res.status(201).json({ message: 'Product added successfully', data: data.rows });
-      }
-    });
-  });
-
- 
-  app.get('/totalPurchase/shop/:id', (req, res) => {
-    const shopId = +req.params.id;
-    const sql = 'SELECT shopid,  SUM(quantity) AS totalQuantity FROM purchases WHERE shopid = $1 GROUP BY shopid';
-    const values = [shopId];
-  
-    client.query(sql, values, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-        res.send(data.rows[0]); 
-      }
-    });
-  });
-  
-  
-  
-
-  app.get('/totalPurchase/product/:id', (req, res) => {
-    const productId = +req.params.id;
-    const sql = 'SELECT shopid, SUM(quantity) AS total_quantity FROM purchases WHERE productid = $1 GROUP BY shopid';
-    const values = [productId];
-  
-    client.query(sql, values, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-        res.send(data.rows);
-      }
-    });
-
-  });
-    app.get('/totalPurchase/shop/:id', (req, res) => {
-    const shopId = +req.params.id;
-    const sql = 'SELECT productid, SUM(quantity) AS total_quantity FROM purchases WHERE shopid = $1 GROUP BY productid';
-    const values = [shopId];
-  
-    client.query(sql, values, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-        res.send(data.rows);
-      }
-    });
-  });
-  app.get('/totalPurchase/product/:id', (req, res) => {
-    const productId = +req.params.id;
-    const sql = 'SELECT shopid, SUM(quantity) AS total_quantity FROM purchases WHERE productid = $1 GROUP BY shopid';
-    const values = [productId];
-  
-    client.query(sql, values, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-        res.send(data.rows);
-      }
-    });
-
-  });
-  app.get('/purchases', (req, res) => {
-    let shop = req.query.shop; 
-    let products = req.query.product;
-    let sort = req.query.sort;
-  
-    let sql = `
-      SELECT purchases.*, shops.name, products.productname,products.category, products.description
-      FROM purchases
-      JOIN shops ON purchases.shopid = shops.shopid
-      JOIN products ON purchases.productid = products.productid
-    `;
-    
-    const params = [];
-    const conditions = [];
-  
-    if (shop) {
-      conditions.push('shops.name LIKE $' + (params.length + 1));
-      params.push('%' + shop + '%');
-    }
-  
-    if (products) {
-      const productNames = products.split(','); // Split products by comma
-      const productConditions = productNames.map((productName, index) => {
-        const paramIndex = params.length + 1;
-        params.push('%' + productName.trim() + '%'); // Trim and add to params
-        return `products.productname LIKE $${paramIndex}`;
+      const sql = 'SELECT shopId,name FROM shops ';
+      client.query(sql, (err, data) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          res.send(data.rows);
+        
+        }
       });
+    });
+   
   
-      conditions.push('(' + productConditions.join(' OR ') + ')');
-    }
+    app.get('/shops/:id', (req, res) => {
+      let id = +req.params.id;
     
-    if (conditions.length > 0) {
-      sql += ' WHERE ' + conditions.join(' AND ');
-    }
+      const sql = 'SELECT * FROM shops where shopid=$1';
+      const params = [id];
+    
+      client.query(sql, params, (err, data) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          res.send(data.rows);
+        }
+      });
+    });
+    app.post('/shops', (req, res) => {
+      const body = req.body;
+      const sql = 'INSERT INTO shops ( name,rent) VALUES ($1, $2)';
+      const values = [ body.name, body.rent];
+    
+      client.query(sql, values, (err, data) => {
+        if (err) {
+          res.status(500).json({ error: err.message });
+        } else {
+          res.status(201).json({ message: 'Shop added successfully', data: data.rows });
+        }
+      });
+    });
+    app.get('/products', (req, res) => {  
+      const sql = 'SELECT * FROM products ';
+      client.query(sql, (err, data) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          res.send(data.rows);
+        }
+      });
+    });
+    app.get('/products/:id', (req, res) => {
+      let id = +req.params.id;
+    
+      const sql = 'SELECT * FROM products where productid=$1';
+      const params = [id];
+    
+      client.query(sql, params, (err, data) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          res.send(data.rows);
+        }
+      });
+    });
+   
   
-    if (sort) {
-      const sortOptions = sort.split(',');
-      const orderBy = sortOptions.map((option) => {
-        switch (option) {
-          case 'QtyAsc':
-            return 'quantity ASC';
-          case 'QtyDesc':
-            return 'quantity DESC';
-          case 'ValueAsc':
-            return 'price*quantity ASC';
-          case 'ValueDesc':
-            return '(price * quantity) DESC';
-          default:
-            return ''; 
+    app.post('/products', (req, res) => {
+      const body = req.body;
+      const sql = 'INSERT INTO products (productname, category, description) VALUES ($1, $2, $3)';
+      const values = [body.productname, body.category, body.description];
+    
+      client.query(sql, values, (err, data) => {
+        if (err) {
+          res.status(500).json({ error: err.message });
+        } else {
+          res.status(201).json({ message: 'Product added successfully', data: data.rows });
+        }
+      });
+    });
+    
+    app.put('/products/:productid', (req, res) => {
+      let productid = +req.params.productid;
+      let body = req.body;
+      const sql = 'UPDATE products SET  category=$1, description=$2, productname=$3 WHERE productid=$4';
+    
+      const params = [ body.category, body.description,body.productname,  productid];
+    
+      client.query(sql, params, (err, data) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          res.send(data.rows);
+        }
+      });
+    });
+  
+    
+  
+  
+  
+    app.post('/purchases', (req, res) => {
+      const body = req.body;
+      const sql = 'INSERT INTO purchases (shopid,productid, quantity, price) VALUES ($1, $2, $3,$4)';
+      const values = [body.shopid, body.productid, body.quantity, body.price];
+    
+      client.query(sql, values, (err, data) => {
+        if (err) {
+          res.status(500).json({ error: err.message });
+        } else {
+          res.status(201).json({ message: 'Product added successfully', data: data.rows });
+        }
+      });
+    });
+  
+   
+    
+    
+  
+  
+    app.get('/totalPurchase/product/:id', (req, res) => {
+      const productId = +req.params.id;
+      const sql = `
+        SELECT purchases.*, shops.name, products.productname, products.category, products.description
+        FROM purchases
+        JOIN shops ON purchases.shopid = shops.shopid
+        JOIN products ON purchases.productid = products.productid
+        WHERE products.productid = $1
+      `;
+      const values = [productId];
+    
+      client.query(sql, values, (err, data) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          res.send(data.rows);
+        }
+      });
+    });
+    
+    app.get('/totalPurchase/shop/:id', (req, res) => {
+      const shopId = +req.params.id;
+      const sql = `
+        SELECT purchases.*, shops.name, products.productname, products.category, products.description
+        FROM purchases
+        JOIN shops ON purchases.shopid = shops.shopid
+        JOIN products ON purchases.productid = products.productid
+        WHERE shops.shopId = $1
+      `;
+      const values = [shopId];
+    
+      client.query(sql, values, (err, data) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          res.send(data.rows);
+        }
+      });
+    });
+     
+    app.get('/totalPurchase/product/:id', (req, res) => {
+      const productId = +req.params.id;
+      const sql = 'SELECT shopid, SUM(quantity) AS total_quantity FROM purchases WHERE productid = $1 GROUP BY shopid';
+      const values = [productId];
+    
+      client.query(sql, values, (err, data) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+          res.send(data.rows);
         }
       });
   
-      if (orderBy.length > 0) {
-        sql += ' ORDER BY ' + orderBy.join(', ');
-      }
-    }
-  
-    client.query(sql, params, (err, data) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.send(data.rows);
-      }
     });
-  });
- app.get('/totalPurchases/:id', (req, res) => {
   
-    let id=req.params.id
-   
-    const sql = `SELECT pd.productid, pd.productname, s.shopid, SUM(p.quantity) AS totalQuantity
-    FROM products pd
-    JOIN purchases p ON pd.productid = p.productid
-    JOIN shops s ON s.shopid = p.shopid
-    WHERE s.shopid = ${id}
-    GROUP BY pd.productid, pd.productname, s.shopid;
-`;
-
-    client.query(sql, (err, data) => {
-      if (err) {
-        res.status(404).send(err);
-      } else {
-       
-        res.send(data.rows);
+  
+  
+    app.get('/purchases', (req, res) => {
+      let shop = req.query.shop;
+      let productIds = req.query.product; 
+      let sort = req.query.sort;
+    
+      const removeEvery2Chars = (input) => {
+        return input.replace(/(..)/g, '');
+      };
+    
+      if (productIds) {
+        productIds = productIds.split(',').map(removeEvery2Chars);
       }
+    
+      if (shop) {
+        shop = shop.slice(2);
+      }
+    
+      let sql = `
+        SELECT purchases.*, shops.name, products.productname, products.category, products.description
+        FROM purchases
+        JOIN shops ON purchases.shopid = shops.shopid
+        JOIN products ON purchases.productid = products.productid
+      `;
+    
+      const params = [];
+      const conditions = [];
+    
+      if (shop) {
+        conditions.push('shops.shopid = $' + (params.length + 1));
+        params.push(shop);
+      }
+    
+      if (productIds && productIds.length > 0) {
+        conditions.push('products.productid IN (' + productIds.map((_, i) => '$' + (params.length + i + 1)).join(', ') + ')');
+        params.push(...productIds);
+      }
+    
+      if (conditions.length > 0) {
+        sql += ' WHERE ' + conditions.join(' AND ');
+      }
+    
+      if (sort) {
+        const sortOptions = sort.split(',');
+        const orderBy = sortOptions.map((option) => {
+          switch (option) {
+            case 'QtyAsc':
+              return 'quantity ASC';
+            case 'QtyDesc':
+              return 'quantity DESC';
+            case 'ValueAsc':
+              return 'price*quantity ASC';
+            case 'ValueDesc':
+              return '(price * quantity) DESC';
+            default:
+              return '';
+          }
+        });
+    
+        if (orderBy.length > 0) {
+          sql += ' ORDER BY ' + orderBy.join(', ');
+        }
+      }
+    
+      client.query(sql, params, (err, data) => {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.send(data.rows);
+        }
+      });
     });
-  });
+    
+   app.get('/totalPurchases/:id', (req, res) => {
+    
+      let id=req.params.id
+      const sql = `
+      SELECT pd.productid, pd.productname, s.shopid,s.name, SUM(p.quantity) AS totalQuantity, p.price
+      FROM products pd
+      JOIN purchases p ON pd.productid = p.productid
+      JOIN shops s ON s.shopid = p.shopid
+      WHERE s.shopid = ${id}
+      GROUP BY pd.productid, pd.productname, s.shopid, p.price ,s.name;
+  `;
+  
+  
+      client.query(sql, (err, data) => {
+        if (err) {
+          res.status(404).send(err);
+        } else {
+         
+          res.send(data.rows);
+        }
+      });
+    });
+    
   
