@@ -487,22 +487,81 @@ app.get('/employees', (req, res) => {
   
   
   
-    app.get('/purchases', (req, res) => {
-      let shop = req.query.shop;
-      let productIds = req.query.product; 
-      let sort = req.query.sort;
+    // app.get('/purchases', (req, res) => {
+    //   let shop = req.query.shop;
+    //   let productIds = req.query.product; 
+    //   let sort = req.query.sort;
     
-      const removeEvery2Chars = (input) => {
-        return input.replace(/(..)/g, '');
-      };
+    //   const removeEvery2Chars = (input) => {
+    //     return input.replace(/(..)/g, '');
+    //   };
     
-      if (productIds) {
-        productIds = productIds.split(',').map(removeEvery2Chars);
-      }
+    //   if (productIds) {
+    //     productIds = productIds.split(',').map(removeEvery2Chars);
+    //   }
     
-      if (shop) {
-        shop = shop.slice(2);
-      }
+    //   if (shop) {
+    //     shop = shop.slice(2);
+    //   }
+    
+    //   let sql = `
+    //     SELECT purchases.*, shops.name, products.productname, products.category, products.description
+    //     FROM purchases
+    //     JOIN shops ON purchases.shopid = shops.shopid
+    //     JOIN products ON purchases.productid = products.productid
+    //   `;
+    
+    //   const params = [];
+    //   const conditions = [];
+    
+    //   if (shop) {
+    //     conditions.push('shops.shopid = $' + (params.length + 1));
+    //     params.push(shop);
+    //   }
+    
+    //   if (productIds && productIds.length > 0) {
+    //     conditions.push('products.productid IN (' + productIds.map((_, i) => '$' + (params.length + i + 1)).join(', ') + ')');
+    //     params.push(...productIds);
+    //   }
+    
+    //   if (conditions.length > 0) {
+    //     sql += ' WHERE ' + conditions.join(' AND ');
+    //   }
+    
+    //   if (sort) {
+    //     const sortOptions = sort.split(',');
+    //     const orderBy = sortOptions.map((option) => {
+    //       switch (option) {
+    //         case 'QtyAsc':
+    //           return 'quantity ASC';
+    //         case 'QtyDesc':
+    //           return 'quantity DESC';
+    //         case 'ValueAsc':
+    //           return 'price*quantity ASC';
+    //         case 'ValueDesc':
+    //           return '(price * quantity) DESC';
+    //         default:
+    //           return '';
+    //       }
+    //     });
+    
+    //     if (orderBy.length > 0) {
+    //       sql += ' ORDER BY ' + orderBy.join(', ');
+    //     }
+    //   }
+    
+    //   client.query(sql, params, (err, data) => {
+    //     if (err) {
+    //       res.status(500).send(err);
+    //     } else {
+    //       res.send(data.rows);
+    //     }
+    //   });
+    // });
+    app.get("/purchases", async (req, res) => {
+      const shopId = req.query.shop;
+      const productId = req.query.product;
+      const sort = req.query.sort;
     
       let sql = `
         SELECT purchases.*, shops.name, products.productname, products.category, products.description
@@ -514,49 +573,38 @@ app.get('/employees', (req, res) => {
       const params = [];
       const conditions = [];
     
-      if (shop) {
+      if (shopId) {
         conditions.push('shops.shopid = $' + (params.length + 1));
-        params.push(shop);
+        params.push(parseInt(shopId.replace("st", ""), 10));
       }
     
-      if (productIds && productIds.length > 0) {
-        conditions.push('products.productid IN (' + productIds.map((_, i) => '$' + (params.length + i + 1)).join(', ') + ')');
-        params.push(...productIds);
+      if (productId) {
+        const productIdNums = productId.split(',').map(id => parseInt(id.replace("pr", ""), 10));
+        conditions.push('products.productid IN (' + productIdNums.map((_, i) => '$' + (params.length + i + 1)).join(', ') + ')');
+        params.push(...productIdNums);
       }
     
       if (conditions.length > 0) {
         sql += ' WHERE ' + conditions.join(' AND ');
       }
     
-      if (sort) {
-        const sortOptions = sort.split(',');
-        const orderBy = sortOptions.map((option) => {
-          switch (option) {
-            case 'QtyAsc':
-              return 'quantity ASC';
-            case 'QtyDesc':
-              return 'quantity DESC';
-            case 'ValueAsc':
-              return 'price*quantity ASC';
-            case 'ValueDesc':
-              return '(price * quantity) DESC';
-            default:
-              return '';
-          }
-        });
-    
-        if (orderBy.length > 0) {
-          sql += ' ORDER BY ' + orderBy.join(', ');
-        }
+      if (sort === 'QtyAsc') {
+        sql += ' ORDER BY quantity ASC';
+      } else if (sort === 'QtyDesc') {
+        sql += ' ORDER BY quantity DESC';
+      } else if (sort === 'ValueAsc') {
+        sql += ' ORDER BY price * quantity ASC';
+      } else if (sort === 'ValueDesc') {
+        sql += ' ORDER BY price * quantity DESC';
       }
     
-      client.query(sql, params, (err, data) => {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          res.send(data.rows);
-        }
-      });
+      try {
+        const { rows } = await client.query(sql, params);
+        res.send(rows);
+      } catch (err) {
+        console.error(err);
+        res.status(500).send(err);
+      }
     });
     
    app.get('/totalPurchases/:id', (req, res) => {
