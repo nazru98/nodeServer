@@ -27,6 +27,53 @@ const client= new Client({
 
 const port=2410;
 app.listen(port,()=>console.log(`Listening on port ${port} !`))
+app.post('/post', async (req, res) => {
+  const { method, fetchURL, data, headers } = req.body;
+
+
+  try {
+      let response;
+      const requestOptions = { headers: headers || {} };
+
+      if (method === 'GET') {
+          response = await axios.get(fetchURL, requestOptions);
+        
+      } else if (method === 'POST') {
+          response = await axios.post(fetchURL, data, requestOptions);
+          console.log(response, 'post');
+      } else if (method === 'PUT') {
+          response = await axios.put(fetchURL, data, requestOptions);
+      } else if (method === 'DELETE') {
+          response = await axios.delete(fetchURL, requestOptions);
+      }
+
+  
+      const status = response.status;
+      res.header('X-Status', status);
+      res.header('X-Method', method);
+  
+      res.json({ status,method, data: response.data});
+    
+  } catch (error) {
+      if (error.response) {
+        
+          const statusCode = error.response.status;
+          if (statusCode === 401) {
+              res.status(401).json({ error: 'Unauthorized: You do not have permission to access the specified URL' });
+            
+          } else if (statusCode === 404) {
+            res.sendStatus(statusCode)
+             
+          } else {
+              res.status(statusCode).json({ error: `Error: ${error.response.statusText}` });
+              console.log(statusCode,'123');
+            }
+
+         
+
+        }
+      }
+});
 
 
 app.get('/employees', (req, res) => {
