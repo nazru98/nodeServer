@@ -1,18 +1,18 @@
-let express=require("express")
-let app=express()
+const express = require("express");
+let app = express();
 app.use(express.json());
-app.use(function(req,res,next){
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header(
-        'Access-Control-Allow-Methods',
-    'GET , POST , OPTIONS ,  PUT , PATCH, DELETE, HEAD'
-    );
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept'  
-    )
-    next()
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
 });
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+let axios=require("axios")
 const {Client}=require("pg");
 const client= new Client({
   user: "postgres",
