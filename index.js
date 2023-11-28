@@ -27,6 +27,8 @@ const client= new Client({
 
 const port=2410;
 app.listen(port,()=>console.log(`Listening on port ${port} !`))
+
+
 app.post('/post', async (req, res) => {
   const { method, fetchURL, data, headers } = req.body;
 
@@ -39,10 +41,10 @@ app.post('/post', async (req, res) => {
           response = await axios.get(fetchURL, requestOptions);
         
       } else if (method === 'POST') {
-          response = await axios.post(fetchURL, data, requestOptions);
-          console.log(response, 'post');
+          response = await axios.post(fetchURL, JSON.parse(data), requestOptions);
+         
       } else if (method === 'PUT') {
-          response = await axios.put(fetchURL, data, requestOptions);
+          response = await axios.put(fetchURL, JSON.parse(data), requestOptions);
       } else if (method === 'DELETE') {
           response = await axios.delete(fetchURL, requestOptions);
       }
@@ -52,7 +54,7 @@ app.post('/post', async (req, res) => {
       res.header('X-Status', status);
       res.header('X-Method', method);
   
-      res.json({ status,method, data: response.data});
+      res.json(response.data);
     
   } catch (error) {
       if (error.response) {
