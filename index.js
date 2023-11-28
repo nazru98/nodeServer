@@ -31,12 +31,13 @@ app.listen(port,()=>console.log(`Listening on port ${port} !`))
 
 app.post('/post', async (req, res) => {
   const { method, fetchURL, data, headers } = req.body;
-
-
   try {
       let response;
       const requestOptions = { headers: headers || {} };
 
+      if (!data && (method === 'POST' || method === 'PUT')) {
+        return res.status(400).json({ error: 'Data should not be empty for POST or PUT requests.' });
+      }
       if (method === 'GET') {
           response = await axios.get(fetchURL, requestOptions);
         
@@ -60,20 +61,11 @@ app.post('/post', async (req, res) => {
       if (error.response) {
         
           const statusCode = error.response.status;
-          if (statusCode === 401) {
-              res.status(401).json({ error: 'Unauthorized: You do not have permission to access the specified URL' });
-            
-          } else if (statusCode === 404) {
-            res.sendStatus(statusCode)
-             
-          } else {
-              res.status(statusCode).json({ error: `Error: ${error.response.statusText}` });
+         
+              res.status(statusCode).send( error.response.statusText);
               console.log(statusCode,'123');
             }
-
-         
-
-        }
+        
       }
 });
 
