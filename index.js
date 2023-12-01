@@ -8,7 +8,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET,POST,DELETE,PUT,OPTIONS");
   next();
 });
 const bodyParser = require('body-parser');
