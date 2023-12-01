@@ -393,61 +393,61 @@ app.get('/employees', (req, res) => {
         }
       });
     });
-    app.get('/products', (req, res) => {  
-      const sql = 'SELECT * FROM products ';
-      client.query(sql, (err, data) => {
-        if (err) {
-          res.status(404).send(err);
-        } else {
-          res.send(data.rows);
-        }
-      });
-    });
-    app.get('/products/:id', (req, res) => {
-      let id = +req.params.id;
+    // app.get('/products', (req, res) => {  
+    //   const sql = 'SELECT * FROM products ';
+    //   client.query(sql, (err, data) => {
+    //     if (err) {
+    //       res.status(404).send(err);
+    //     } else {
+    //       res.send(data.rows);
+    //     }
+    //   });
+    // });
+    // app.get('/products/:id', (req, res) => {
+    //   let id = +req.params.id;
     
-      const sql = 'SELECT * FROM products where productid=$1';
-      const params = [id];
+    //   const sql = 'SELECT * FROM products where productid=$1';
+    //   const params = [id];
     
-      client.query(sql, params, (err, data) => {
-        if (err) {
-          res.status(404).send(err);
-        } else {
-          res.send(data.rows);
-        }
-      });
-    });
+    //   client.query(sql, params, (err, data) => {
+    //     if (err) {
+    //       res.status(404).send(err);
+    //     } else {
+    //       res.send(data.rows);
+    //     }
+    //   });
+    // });
    
   
-    app.post('/products', (req, res) => {
-      const body = req.body;
-      const sql = 'INSERT INTO products (productname, category, description) VALUES ($1, $2, $3)';
-      const values = [body.productname, body.category, body.description];
+    // app.post('/products', (req, res) => {
+    //   const body = req.body;
+    //   const sql = 'INSERT INTO products (productname, category, description) VALUES ($1, $2, $3)';
+    //   const values = [body.productname, body.category, body.description];
     
-      client.query(sql, values, (err, data) => {
-        if (err) {
-          res.status(500).json({ error: err.message });
-        } else {
-          res.status(201).json({ message: 'Product added successfully', data: data.rows });
-        }
-      });
-    });
+    //   client.query(sql, values, (err, data) => {
+    //     if (err) {
+    //       res.status(500).json({ error: err.message });
+    //     } else {
+    //       res.status(201).json({ message: 'Product added successfully', data: data.rows });
+    //     }
+    //   });
+    // });
     
-    app.put('/products/:productid', (req, res) => {
-      let productid = +req.params.productid;
-      let body = req.body;
-      const sql = 'UPDATE products SET  category=$1, description=$2, productname=$3 WHERE productid=$4';
+    // app.put('/products/:productid', (req, res) => {
+    //   let productid = +req.params.productid;
+    //   let body = req.body;
+    //   const sql = 'UPDATE products SET  category=$1, description=$2, productname=$3 WHERE productid=$4';
     
-      const params = [ body.category, body.description,body.productname,  productid];
+    //   const params = [ body.category, body.description,body.productname,  productid];
     
-      client.query(sql, params, (err, data) => {
-        if (err) {
-          res.status(404).send(err);
-        } else {
-          res.send(data.rows);
-        }
-      });
-    });
+    //   client.query(sql, params, (err, data) => {
+    //     if (err) {
+    //       res.status(404).send(err);
+    //     } else {
+    //       res.send(data.rows);
+    //     }
+    //   });
+    // });
   
     
   
