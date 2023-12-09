@@ -941,4 +941,24 @@ app.get('/employees', (req, res) => {
       });
     
     
-      
+      let furnitureUsers = [
+  { email: "user@user.com", password: "user1234", role: "user" },
+  { email: "admin@admin.com", password: "admin1234", role: "admin" },
+];
+
+app.post("/loginUser", (req, res) => {
+  let { username, password } = req.body;
+  let loginUser = furnitureUsers.find(
+    (u1) => u1.email === username && u1.password === password
+  );
+  if (loginUser) {
+    let cusData = {
+      username: loginUser.email,
+      password: loginUser.password,
+      role: loginUser.role,
+    };
+    res.send(cusData);
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+});
