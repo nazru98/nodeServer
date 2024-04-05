@@ -927,7 +927,12 @@ app.get('/employees', (req, res) => {
        
       });
     
-    
+      app.get("/products", (req, res) => {
+
+        res.send(productsArr)
+      
+       
+      });
       app.delete("/products/:id", function (req, res) {
         let id = req.params.id;
         
@@ -946,19 +951,19 @@ app.get('/employees', (req, res) => {
   { email: "admin@admin.com", password: "admin1234", role: "admin" },
 ];
 
-app.post("/loginUser", (req, res) => {
-  let { username, password } = req.body;
-  let loginUser = furnitureUsers.find(
-    (u1) => u1.email === username && u1.password === password
-  );
-  if (loginUser) {
-    let cusData = {
-      username: loginUser.email,
-      password: loginUser.password,
-      role: loginUser.role,
-    };
-    res.send(cusData);
-  } else {
-    res.status(401).send("Unauthorized");
-  }
-});
+
+app.post("/login", function(req, res) {
+  let {email,password}=req.body
+  
+    let cust = customers.find(function(item) {
+      return item.email === email && item.password === password;
+    });
+    console.log(cust);
+    var custRec= {
+      name: cust.name,
+      email:cust.email
+    }
+    console.log(custRec);
+   
+    res.send(custRec);
+  });
