@@ -970,489 +970,489 @@ app.get('/employees', (req, res) => {
 //   });
 
 customers = [
-  {
-    custId: 1,
-    name: "ABC",
-    password: "abc1234",
-    role: "admin",
-    email: "abc@gmail.com"
-  },
-  {
-    custId: 2,
-    name: "Willie",
-    password: "willie1234",
-    role: "student",
-    email: "willie@gmail.com"
-  },
-  {
-    custId: 3,
-    name: "Jack",
-    password: "jack1234",
-    role: "faculty",
-    email: "jack@gmail.com"
-  },
-  {
-    custId: 4,
-    name: "James",
-    password: "james1234",
-    role: "student",
-    email: "james@gmail.com"
-  },
-  {
-    custId: 5,
-    name: "Harry",
-    password: "harry1234",
-    role: "faculty",
-    email: "harry@gmail.com"
-  },
-  {
-    custId: 6,
-    name: "Tia",
-    password: "tia1234",
-    role: "student",
-    email: "tia@gmail.com"
-  },
-  {
-    custId: 7,
-    name: "Aditya",
-    password: "aditya123",
-    role: "faculty",
-    email: "aditya@gmail.com"
-  },
-  {
-    custId: 8,
-    name: "Sonu",
-    password: "sonu1234",
-    role: "student",
-    email: "sonu@gmail.com"
-  },
-  {
-    custId: 9,
-    name: "Ellie",
-    password: "ellie1234",
-    role: "student",
-    email: "ellie@gmail.com"
-  },
-  {
-    custId: 10,
-    name: "Gia",
-    password: "gia1234",
-    role: "faculty",
-    email: "gia@gmail.com"
-  }
-];
-courses = [
-  {
-    courseId: 1,
-    name: "ANGULAR",
-    code: "ANG97",
-    description: "All fundamentals of Angular 7",
-    faculty: ["Daniel", "Jack"],
-    students: ["Sam"]
-  },
-  {
-    courseId: 2,
-    name: "JAVASCRIPT",
-    code: "JS124",
-    description: "Intoduction to javascript",
-    faculty: ["Aditya"],
-    students: ["James", "Joy", "Monu", "Rita"]
-  },
-  {
-    courseId: 3,
-    name: "REACT",
-    code: "RCT56",
-    description: "React Javascript library",
-    faculty: ["Jack", "Gia"],
-    students: ["Raima", "Rita", "Sonu", "James"]
-  },
-  {
-    courseId: 4,
-    name: "BOOTSTRAP",
-    code: "BS297",
-    description: "Bootstrap Designing Framework",
-    faculty: [],
-    students: ["James", "Tia", "Ellie"]
-  },
-  {
-    courseId: 5,
-    name: "CSS",
-    code: "CS365",
-    description: "Basic stylesheet language",
-    faculty: [],
-    students: ["James", "Rita", "Monica"]
-  },
-  {
-    courseId: 6,
-    name: "REST AND MICROSERVICES",
-    code: "RM392",
-    description: "Introduction to Microservices",
-    faculty: [],
-    students: ["Sam"]
-  },
-  {
-    courseId: 7,
-    name: "NODE",
-    code: "ND725",
-    description: "Introduction to Node",
-    faculty: ["Sonia"],
-    students: ["Saransh", "Shrey", "Monica"]
-  }
-];
-faculties = [
-  { id: 5, name: "Daniel", courses: ["ANGULAR"] },
-  { id: 4, name: "Sonia", courses: ["NODE"] },
-  { id: 3, name: "Jack", courses: ["REACT", "ANGULAR"] },
-  { id: 2, name: "Gia", courses: ["REACT"] },
-  { id: 1, name: "Aditya", courses: ["ANGULAR"] }
-];
-classes = [
-  {
-    classId: 1,
-    course: "REACT",
-    time: "07:45",
-    endTime: "08:45",
-    topic: "Redux",
-    facultyName: "Jack"
-  },
-  {
-    classId: 2,
-    course: "ANGULAR",
-    time: "15:45",
-    endTime: "17:40",
-    topic: "Component",
-    facultyName: "Jack"
-  },
-  {
-    classId: 3,
-    course: "JAVASCRIPT",
-    time: "15:45",
-    endTime: "17:40",
-    topic: "Component",
-    facultyName: "Aditya"
-  }
-];
-students = [
-  {
-    id: 16,
-    name: "Willie",
-    dob: "31-July-1997",
-    gender: "male",
-    about: "Pursuing Graduation",
-    courses: ["ANGULAR", "NODE"]
-  },
-  {
-    id: 15,
-    name: "Tia",
-    dob: "30-July-1997",
-    gender: "male",
-    about: "Pursuing Graduation",
-    courses: []
-  },
-  {
-    id: 14,
-    name: "Apoorv",
-    dob: "31-August-1998",
-    gender: "male",
-    about: "Want to learn new technologies",
-    courses: []
-  },
-  {
-    id: 13,
-    name: "Joy",
-    dob: "31-July-1997",
-    gender: "male",
-    about: "Pursuing Graduation",
-    courses: ["JAVASCRIPT"]
-  },
-  {
-    id: 12,
-    name: "Rachel",
-    dob: "31-August-1998",
-    gender: "female",
-    about: "Pursuing Graduation",
-    courses: []
-  },
-  {
-    id: 11,
-    name: "Monica",
-    dob: "30-July-1997",
-    gender: "female",
-    about: "Want to learn new technologies",
-    courses: ["CSS", "NODE"]
-  },
-  {
-    id: 10,
-    name: "Monu",
-    dob: "12-May-1997",
-    gender: "male",
-    about: "Pursuing Graduation",
-    courses: ["JAVASCRIPT"]
-  },
-  {
-    id: 9,
-    name: "Sonu",
-    dob: "12-May-1997",
-    gender: "male",
-    about: "Pursuing Graduation",
-    courses: ["REACT"]
-  },
-  {
-    id: 8,
-    name: "Raima",
-    dob: "30-July-1997",
-    gender: "female",
-    about: "Want to learn new technologies",
-    courses: ["REACT"]
-  },
-  {
-    id: 7,
-    name: "Rita",
-    dob: "31-August-1998",
-    gender: "female",
-    about: "Pursuing Graduation",
-    courses: ["JAVASCRIPT", "REACT", "CSS"]
-  },
-  {
-    id: 6,
-    name: "Shrey",
-    dob: "12-May-1997",
-    gender: "male",
-    about: "Pursuing Graduation",
-    courses: ["NODE"]
-  },
-  {
-    id: 5,
-    name: "Saransh",
-    dob: "31-July-1997",
-    gender: "male",
-    about: "Want to learn new technologies",
-    courses: ["NODE"]
-  },
-  {
-    id: 4,
-    name: "Sanya",
-    dob: "31-July-1997",
-    gender: "male",
-    about: "Want to learn new technologies",
-    courses: []
-  },
-  {
-    id: 3,
-    name: "James",
-    dob: "12-July-1994",
-    gender: "male",
-    about: "Pursuing Graduation",
-    courses: ["JAVASCRIPT", "BOOTSTRAP", "CSS", "REACT"]
-  },
-  {
-    id: 2,
-    name: "Sam",
-    dob: "12-July-1994",
-    gender: "male",
-    about: "Pursuing Graduation",
-    courses: ["ANGULAR", "REST AND MICROSERVICES"]
-  },
-  {
-    id: 1,
-    name: "Ellie",
-    dob: "12-June-1992",
-    gender: "female",
-    about: "Want to learn new technologies",
-    courses: ["BOOTSTRAP"]
-  }
-];
+    {
+      custId: 1,
+      name: "ABC",
+      password: "abc1234",
+      role: "admin",
+      email: "abc@gmail.com"
+    },
+    {
+      custId: 2,
+      name: "Willie",
+      password: "willie1234",
+      role: "student",
+      email: "willie@gmail.com"
+    },
+    {
+      custId: 3,
+      name: "Jack",
+      password: "jack1234",
+      role: "faculty",
+      email: "jack@gmail.com"
+    },
+    {
+      custId: 4,
+      name: "James",
+      password: "james1234",
+      role: "student",
+      email: "james@gmail.com"
+    },
+    {
+      custId: 5,
+      name: "Harry",
+      password: "harry1234",
+      role: "faculty",
+      email: "harry@gmail.com"
+    },
+    {
+      custId: 6,
+      name: "Tia",
+      password: "tia1234",
+      role: "student",
+      email: "tia@gmail.com"
+    },
+    {
+      custId: 7,
+      name: "Aditya",
+      password: "aditya123",
+      role: "faculty",
+      email: "aditya@gmail.com"
+    },
+    {
+      custId: 8,
+      name: "Sonu",
+      password: "sonu1234",
+      role: "student",
+      email: "sonu@gmail.com"
+    },
+    {
+      custId: 9,
+      name: "Ellie",
+      password: "ellie1234",
+      role: "student",
+      email: "ellie@gmail.com"
+    },
+    {
+      custId: 10,
+      name: "Gia",
+      password: "gia1234",
+      role: "faculty",
+      email: "gia@gmail.com"
+    }
+  ];
+  courses = [
+    {
+      courseId: 1,
+      name: "ANGULAR",
+      code: "ANG97",
+      description: "All fundamentals of Angular 7",
+      faculty: ["Daniel", "Jack"],
+      students: ["Sam"]
+    },
+    {
+      courseId: 2,
+      name: "JAVASCRIPT",
+      code: "JS124",
+      description: "Intoduction to javascript",
+      faculty: ["Aditya"],
+      students: ["James", "Joy", "Monu", "Rita"]
+    },
+    {
+      courseId: 3,
+      name: "REACT",
+      code: "RCT56",
+      description: "React Javascript library",
+      faculty: ["Jack", "Gia"],
+      students: ["Raima", "Rita", "Sonu", "James"]
+    },
+    {
+      courseId: 4,
+      name: "BOOTSTRAP",
+      code: "BS297",
+      description: "Bootstrap Designing Framework",
+      faculty: [],
+      students: ["James", "Tia", "Ellie"]
+    },
+    {
+      courseId: 5,
+      name: "CSS",
+      code: "CS365",
+      description: "Basic stylesheet language",
+      faculty: [],
+      students: ["James", "Rita", "Monica"]
+    },
+    {
+      courseId: 6,
+      name: "REST AND MICROSERVICES",
+      code: "RM392",
+      description: "Introduction to Microservices",
+      faculty: [],
+      students: ["Sam"]
+    },
+    {
+      courseId: 7,
+      name: "NODE",
+      code: "ND725",
+      description: "Introduction to Node",
+      faculty: ["Sonia"],
+      students: ["Saransh", "Shrey", "Monica"]
+    }
+  ];
+  faculties = [
+    { id: 5, name: "Daniel", courses: ["ANGULAR"] },
+    { id: 4, name: "Sonia", courses: ["NODE"] },
+    { id: 3, name: "Jack", courses: ["REACT", "ANGULAR"] },
+    { id: 2, name: "Gia", courses: ["REACT"] },
+    { id: 1, name: "Aditya", courses: ["ANGULAR"] }
+  ];
+  classes = [
+    {
+      classId: 1,
+      course: "REACT",
+      time: "07:45",
+      endTime: "08:45",
+      topic: "Redux",
+      facultyName: "Jack"
+    },
+    {
+      classId: 2,
+      course: "ANGULAR",
+      time: "15:45",
+      endTime: "17:40",
+      topic: "Component",
+      facultyName: "Jack"
+    },
+    {
+      classId: 3,
+      course: "JAVASCRIPT",
+      time: "15:45",
+      endTime: "17:40",
+      topic: "Component",
+      facultyName: "Aditya"
+    }
+  ];
+  students = [
+    {
+      id: 16,
+      name: "Willie",
+      dob: "31-July-1997",
+      gender: "male",
+      about: "Pursuing Graduation",
+      courses: ["ANGULAR", "NODE"]
+    },
+    {
+      id: 15,
+      name: "Tia",
+      dob: "30-July-1997",
+      gender: "male",
+      about: "Pursuing Graduation",
+      courses: []
+    },
+    {
+      id: 14,
+      name: "Apoorv",
+      dob: "31-August-1998",
+      gender: "male",
+      about: "Want to learn new technologies",
+      courses: []
+    },
+    {
+      id: 13,
+      name: "Joy",
+      dob: "31-July-1997",
+      gender: "male",
+      about: "Pursuing Graduation",
+      courses: ["JAVASCRIPT"]
+    },
+    {
+      id: 12,
+      name: "Rachel",
+      dob: "31-August-1998",
+      gender: "female",
+      about: "Pursuing Graduation",
+      courses: []
+    },
+    {
+      id: 11,
+      name: "Monica",
+      dob: "30-July-1997",
+      gender: "female",
+      about: "Want to learn new technologies",
+      courses: ["CSS", "NODE"]
+    },
+    {
+      id: 10,
+      name: "Monu",
+      dob: "12-May-1997",
+      gender: "male",
+      about: "Pursuing Graduation",
+      courses: ["JAVASCRIPT"]
+    },
+    {
+      id: 9,
+      name: "Sonu",
+      dob: "12-May-1997",
+      gender: "male",
+      about: "Pursuing Graduation",
+      courses: ["REACT"]
+    },
+    {
+      id: 8,
+      name: "Raima",
+      dob: "30-July-1997",
+      gender: "female",
+      about: "Want to learn new technologies",
+      courses: ["REACT"]
+    },
+    {
+      id: 7,
+      name: "Rita",
+      dob: "31-August-1998",
+      gender: "female",
+      about: "Pursuing Graduation",
+      courses: ["JAVASCRIPT", "REACT", "CSS"]
+    },
+    {
+      id: 6,
+      name: "Shrey",
+      dob: "12-May-1997",
+      gender: "male",
+      about: "Pursuing Graduation",
+      courses: ["NODE"]
+    },
+    {
+      id: 5,
+      name: "Saransh",
+      dob: "31-July-1997",
+      gender: "male",
+      about: "Want to learn new technologies",
+      courses: ["NODE"]
+    },
+    {
+      id: 4,
+      name: "Sanya",
+      dob: "31-July-1997",
+      gender: "male",
+      about: "Want to learn new technologies",
+      courses: []
+    },
+    {
+      id: 3,
+      name: "James",
+      dob: "12-July-1994",
+      gender: "male",
+      about: "Pursuing Graduation",
+      courses: ["JAVASCRIPT", "BOOTSTRAP", "CSS", "REACT"]
+    },
+    {
+      id: 2,
+      name: "Sam",
+      dob: "12-July-1994",
+      gender: "male",
+      about: "Pursuing Graduation",
+      courses: ["ANGULAR", "REST AND MICROSERVICES"]
+    },
+    {
+      id: 1,
+      name: "Ellie",
+      dob: "12-June-1992",
+      gender: "female",
+      about: "Want to learn new technologies",
+      courses: ["BOOTSTRAP"]
+    }
+  ];
 
 
-app.post("/login", function(req, res) {
-  var email = req.body.email;
-  var password = req.body.password;
-
-  var cust = customers.find(function(item) {
-    return item.email === email && item.password === password;
+  app.post("/login", function(req, res) {
+    var email = req.body.email;
+    var password = req.body.password;
+  
+    var cust = customers.find(function(item) {
+      return item.email === email && item.password === password;
+    });
+    console.log(cust);
+    var custRec= {
+      name: cust.name,
+      role: cust.role,
+      email:cust.email
+    }
+    console.log(custRec);
+   
+    res.send(custRec);
   });
-  console.log(cust);
-  var custRec= {
-    name: cust.name,
-    role: cust.role,
-    email:cust.email
-  }
-  console.log(custRec);
- 
-  res.send(custRec);
-});
 
 app.get("/customers",function(req,res){
-res.send(customers)
+  res.send(customers)
 })
 
 
-
+  
 app.post("/register", function(req, res) {
-const name = req.body.name;
-const email = req.body.email;
-const password = req.body.password;
-const role = req.body.role;
+  const name = req.body.name;
+  const email = req.body.email;
+  const password = req.body.password;
+  const role = req.body.role;
 
-if (role !== "student" && role !== "faculty") {
-  return res.status(400).json({ error: "Invalid role" });
-}
+  if (role !== "student" && role !== "faculty") {
+    return res.status(400).json({ error: "Invalid role" });
+  }
 
-let id = customers.length;
-const cust = {
-  custId: id + 1,
-  name: name,
-  email: email,
-  password: password,
-  role: role,
-};
-
-customers.unshift(cust);
-var customerRes = {
-  name: name,
-  email: email,
-  role: role,
-  custId: cust.custId,
-};
-
-if (role === "student") {
-  const student = {
-    id: students.length+1,
+  let id = customers.length;
+  const cust = {
+    custId: id + 1,
     name: name,
-    dob: "",
-    gender: "",
-    about: "",
-    courses: [],
+    email: email,
+    password: password,
+    role: role,
   };
-  students.unshift(student);
-}
 
-if (role === "faculty") {
-  const faculty = {
-    id: faculties.length+1,
+  customers.unshift(cust);
+  var customerRes = {
     name: name,
-    courses: [],
+    email: email,
+    role: role,
+    custId: cust.custId,
   };
-  faculties.unshift(faculty);
-}
 
-console.log(customers);
-res.send(customerRes);
-console.log(customerRes);
+  if (role === "student") {
+    const student = {
+      id: students.length+1,
+      name: name,
+      dob: "",
+      gender: "",
+      about: "",
+      courses: [],
+    };
+    students.unshift(student);
+  }
+
+  if (role === "faculty") {
+    const faculty = {
+      id: faculties.length+1,
+      name: name,
+      courses: [],
+    };
+    faculties.unshift(faculty);
+  }
+
+  console.log(customers);
+  res.send(customerRes);
+  console.log(customerRes);
 });
 
-
-app.get('/getStudentNames', (req, res) => {
-  const studentNames = students.map(student => student.name);
-  res.send(studentNames);
-});
-
-app.get('/getFacultyNames', (req, res) => {
-  const facultyNames = faculties.map(faculty => faculty.name);
-  res.send(facultyNames);
-});
-
-
-
-app.get('/getCourses', (req, res) => {
- res.send(courses)
- });
-
-
- app.get("/getCourses/:courseId", function(req, res) {
-  var courseId = +req.params.courseId;
-  console.log("courseId", courseId);
-  const courseDetails = courses.find(function(item) {
-    return item.courseId === courseId;
+ 
+  app.get('/getStudentNames', (req, res) => {
+    const studentNames = students.map(student => student.name);
+    res.send(studentNames);
   });
-  console.log(courseDetails);
-  res.send(courseDetails);
-});
 
-app.get('/getStudents', (req, res) => {
-  let courses=req.query.course;
-  let filterStudent=students
- 
-  if (courses) {
-      const courseArr = courses.split(",");
-      filterStudent = filterStudent.filter((student) => {
-          return student.courses.some((course) => courseArr.includes(course));
-      });
-  }
-  var resArr=pagination1(filterStudent, parseInt(req.query.page))
-  res.json({
-   items: resArr,
-   page: parseInt(req.query.page),  
-   totalItems: resArr.length,
-   totalNum: filterStudent.length
- });
- });
+  app.get('/getFacultyNames', (req, res) => {
+    const facultyNames = faculties.map(faculty => faculty.name);
+    res.send(facultyNames);
+  });
 
 
 
+  app.get('/getCourses', (req, res) => {
+   res.send(courses)
+   });
 
- app.get('/getFaculties', (req, res) => {
 
-  let courses=req.query.course;
-  let filterFaculty=faculties
- 
-  if (courses) {
-      const courseArr = courses.split(",");
-      filterFaculty = filterFaculty.filter((student) => {
-          return student.courses.some((course) => courseArr.includes(course));
-      });
-  }
+   app.get("/getCourses/:courseId", function(req, res) {
+    var courseId = +req.params.courseId;
+    console.log("courseId", courseId);
+    const courseDetails = courses.find(function(item) {
+      return item.courseId === courseId;
+    });
+    console.log(courseDetails);
+    res.send(courseDetails);
+  });
 
-  var resArr=pagination1(filterFaculty, parseInt(req.query.page))
-  res.json({
-   items: resArr,
-   page: parseInt(req.query.page),  
-   totalItems: resArr.length,
-   totalNum: filterFaculty.length
- });
- });
+  app.get('/getStudents', (req, res) => {
+    let courses=req.query.course;
+    let filterStudent=students
+   
+    if (courses) {
+        const courseArr = courses.split(",");
+        filterStudent = filterStudent.filter((student) => {
+            return student.courses.some((course) => courseArr.includes(course));
+        });
+    }
+    var resArr=pagination1(filterStudent, parseInt(req.query.page))
+    res.json({
+     items: resArr,
+     page: parseInt(req.query.page),  
+     totalItems: resArr.length,
+     totalNum: filterStudent.length
+   });
+   });
+
+
+
+
+   app.get('/getFaculties', (req, res) => {
+
+    let courses=req.query.course;
+    let filterFaculty=faculties
+   
+    if (courses) {
+        const courseArr = courses.split(",");
+        filterFaculty = filterFaculty.filter((student) => {
+            return student.courses.some((course) => courseArr.includes(course));
+        });
+    }
+
+    var resArr=pagination1(filterFaculty, parseInt(req.query.page))
+    res.json({
+     items: resArr,
+     page: parseInt(req.query.page),  
+     totalItems: resArr.length,
+     totalNum: filterFaculty.length
+   });
+   });
 
 app.put('/putCourse', (req, res) => {
-console.log("Put called");
-const updatedCourse = req.body;
-const courseId = updatedCourse.courseId;
-const index = courses.findIndex((course) => course.courseId === courseId);
+  console.log("Put called");
+  const updatedCourse = req.body;
+  const courseId = updatedCourse.courseId;
+  const index = courses.findIndex((course) => course.courseId === courseId);
 
-if (index >= 0) {
-  courses[index] = { ...courses[index], ...updatedCourse };
-  if (updatedCourse.faculty) {
-    faculties.forEach((faculty) => {
-      if (faculty.courses.includes(updatedCourse.name)) {
-        faculty.courses = faculty.courses.filter(course => course !== updatedCourse.name);
+  if (index >= 0) {
+    courses[index] = { ...courses[index], ...updatedCourse };
+    if (updatedCourse.faculty) {
+      faculties.forEach((faculty) => {
+        if (faculty.courses.includes(updatedCourse.name)) {
+          faculty.courses = faculty.courses.filter(course => course !== updatedCourse.name);
+        }
+      });
+      updatedCourse.faculty.forEach(facultyName => {
+        const faculty = faculties.find(f => f.name === facultyName);
+        if (faculty) {
+          faculty.courses.push(updatedCourse.name);
+        }
+      });
+    }
+
+   
+    students.forEach((student) => {
+      if (student.courses.includes(updatedCourse.name)) {
+        student.courses = student.courses.filter(course => course !== updatedCourse.name);
       }
     });
-    updatedCourse.faculty.forEach(facultyName => {
-      const faculty = faculties.find(f => f.name === facultyName);
-      if (faculty) {
-        faculty.courses.push(updatedCourse.name);
+    updatedCourse.students.forEach(studentName => {
+      const student = students.find(s => s.name === studentName);
+      if (student) {
+        student.courses.push(updatedCourse.name);
       }
     });
+    
+
+    res.send(courses[index]);
+  } else {
+    res.status(404).send("Course not found");
   }
-
- 
-  students.forEach((student) => {
-    if (student.courses.includes(updatedCourse.name)) {
-      student.courses = student.courses.filter(course => course !== updatedCourse.name);
-    }
-  });
-  updatedCourse.students.forEach(studentName => {
-    const student = students.find(s => s.name === studentName);
-    if (student) {
-      student.courses.push(updatedCourse.name);
-    }
-  });
-  
-
-  res.send(courses[index]);
-} else {
-  res.status(404).send("Course not found");
-}
-console.log(updatedCourse, 'updated');
+  console.log(updatedCourse, 'updated');
 });
 
 
@@ -1466,22 +1466,22 @@ res.send(studentDetails)
 
 
 app.get("/getStudentCourse/:name", (req, res) => {
-const studentName = req.params.name;
-const courseDetails = courses.filter(course => course.students.includes(studentName));
-console.log(courseDetails);
-res.send(courseDetails);
+  const studentName = req.params.name;
+  const courseDetails = courses.filter(course => course.students.includes(studentName));
+  console.log(courseDetails);
+  res.send(courseDetails);
 });
 
 app.get("/getStudentClass/:name", (req, res) => {
-let studentName = req.params.name; 
-let student = students.find(student => student.name === studentName);
-if (student) {
-  let studentCourses = student.courses;
-  let studentClasses = classes.filter(cls => studentCourses.includes(cls.course));
-  res.json(studentClasses);
-} else {
-  res.status(404).json({ error: "Student not found" });
-}
+  let studentName = req.params.name; 
+  let student = students.find(student => student.name === studentName);
+  if (student) {
+    let studentCourses = student.courses;
+    let studentClasses = classes.filter(cls => studentCourses.includes(cls.course));
+    res.json(studentClasses);
+  } else {
+    res.status(404).json({ error: "Student not found" });
+  }
 });
 
 
@@ -1489,43 +1489,43 @@ if (student) {
 
 
 app.post("/postStudentDetails/:name", (req, res) => {
-const studentName = req.params.name; 
-const updatedStudentData = req.body;
-const student = students.find((student) => student.name === studentName);
+  const studentName = req.params.name; 
+  const updatedStudentData = req.body;
+  const student = students.find((student) => student.name === studentName);
 
-if (!student) {
-  return res.status(404).json({ message: "Student not found" });
-}
-student.name = updatedStudentData.name;
-student.dob = updatedStudentData.dob;
-student.gender = updatedStudentData.gender;
-student.about = updatedStudentData.about;
-student.courses = updatedStudentData.courses;
+  if (!student) {
+    return res.status(404).json({ message: "Student not found" });
+  }
+  student.name = updatedStudentData.name;
+  student.dob = updatedStudentData.dob;
+  student.gender = updatedStudentData.gender;
+  student.about = updatedStudentData.about;
+  student.courses = updatedStudentData.courses;
 student.id=updatedStudentData.id
-return res.status(200).json({ message: "Student details updated successfully", student });
+  return res.status(200).json({ message: "Student details updated successfully", student });
 });
 
 app.get("/getFacultyCourse/:name", (req, res) => {
-const facultyName = req.params.name;
-const courseDetails = courses.filter(course => course.faculty.includes(facultyName));
-console.log(courseDetails);
-res.send(courseDetails);
+  const facultyName = req.params.name;
+  const courseDetails = courses.filter(course => course.faculty.includes(facultyName));
+  console.log(courseDetails);
+  res.send(courseDetails);
 });
 
 
 app.get("/getFacultyClass/:name", (req, res) => {
-let facultyNames = req.params.name; 
-let classesArr=classes.filter(cl=>cl.facultyName===facultyNames)
-res.send(classesArr)
+  let facultyNames = req.params.name; 
+  let classesArr=classes.filter(cl=>cl.facultyName===facultyNames)
+  res.send(classesArr)
 });
 
 
 app.post("/postClass",(req,res)=>{
-let newClass=req.body;
-newClass.classId=classes.length+1;
-classes.push(newClass);
-res.send(classes),
-console.log(newClass,'ghjk');
+  let newClass=req.body;
+  newClass.classId=classes.length+1;
+  classes.push(newClass);
+  res.send(classes),
+  console.log(newClass,'ghjk');
 })
 
 app.put("/postClass/:id",(req,res)=>{
@@ -1533,27 +1533,27 @@ let classId=+req.params.id;
 const class1 = req.body;
 let index=classes.findIndex((obj1)=>obj1.classId===classId)
 if(index>=0){
-classes[index]=class1
-let updateClass={
-  classId:class1.classId,
-  topic:class1.topic,
-  time:class1.time,
-  endTime:class1.endTime,
-  courses:class1.courses,
-  facultyName:class1.facultyName
-}
-res.send(updateClass)
-console.log(class1,'gfhjk');
+  classes[index]=class1
+  let updateClass={
+    classId:class1.classId,
+    topic:class1.topic,
+    time:class1.time,
+    endTime:class1.endTime,
+    courses:class1.courses,
+    facultyName:class1.facultyName
+  }
+  res.send(updateClass)
+  console.log(class1,'gfhjk');
 }else{
-res.send('Not Found')
+  res.send('Not Found')
 }
 })
 
 
-function pagination1(obj, page) {
- 
-  var resArr = obj;
-  resArr = resArr.slice(page * 3 - 3, page * 3);
-  return resArr;
-}
+  function pagination1(obj, page) {
+   
+    var resArr = obj;
+    resArr = resArr.slice(page * 3 - 3, page * 3);
+    return resArr;
+  }
 app.listen(port, () => console.log(`Node app listening on port ${port}!`));
