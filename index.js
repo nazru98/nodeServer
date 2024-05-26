@@ -671,299 +671,889 @@ app.get('/employees', (req, res) => {
       });
     });
     
-    let productsArr = [
-      {
-        id: 1,
-        category: "Watches",
-        description:
-          "The look that made Swiss watches the toast of the world. Still unbeatable.",
-        imgLink:
-          "https://images.pexels.com/photos/125779/pexels-photo-125779.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
-        name: "Silver",
-        price: 1600,
-      },
-      {
-        id: 2,
-        category: "Watches",
-        description: "Dark, black beauty. Sure to look good on the wrist.",
-        imgLink:
-          "https://images.pexels.com/photos/1697566/pexels-photo-1697566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        name: "Black",
-        price: 899,
-      },
-      {
-        id: 3,
-        category: "Watches",
-        description:
-          "Multi chronographs, stop watch, timers. Altimeter. What else.",
-        imgLink:
-          "https://images.pexels.com/photos/2113994/pexels id-photo-2113994.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        name: "Chronograph",
-        price: 1199,
-      },
-      {
-        id: 4,
-        category: "Watches",
-        description: "For all ages. For all times. Classic Look. Classic leather.",
-        imgLink:
-          "https://images.pexels.com/photos/236915/pexels-photo-236915.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        name: "Classic",
-        price: 1250,
-      },
-      {
-        id: 5,
-        category: "Watches",
-        description: "The original Apple Watch. Still a great buy.",
-        imgLink:
-          "https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        name: "Apple v1",
-        price: 999,
-      },
-      {
-        id: 6,
-        category: "Watches",
-        description: "Mechanical 28 jewelled watch. Connoisseur delight.",
-        imgLink:
-          "https://images.pexels.com/photos/47339/mechanics-movement-feinmechanik-wrist-watch-47339.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        name: "Jewelled",
-        price: 1999,
-      },
-      {
-        id: 7,
-        category: "Sunglasses",
-        description: "Desirable, reddish tint. Sure to attract attention.",
-        imgLink:
-          "https://images.pexels.com/photos/46710/pexels-photo-46710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        name: "Tinted Red",
-        price: 399,
-      },
-      {
-        id: 8,
-        category: "Sunglasses",
-        description: "Nostalgic, bluish tint, sure to get memories back. Vintage.",
-        imgLink:
-          "https://images.pexels.com/photos/701877/pexels-photo-701877.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        name: "Oldies",
-        price: 199,
-      },
-      {
-        id: 9,
-        category: "Sunglasses",
-        description: "Trendy, young sunglasses with retro look. Teen favourite.",
-        imgLink:
-          "https://images.pexels.com/photos/1362558/pexels-photo-1362558.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        name: "Youthful",
-        price: 219,
-      },
-      {
-        id: 10,
-        category: "Sunglasses",
-        description: "Chic sunglasses. Classic dark shades, sure to generate envy.",
-        imgLink:
-          "https://images.pexels.com/photos/65659/glasses-glass-circle-light-transmittance-65659.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        name: "Classic Dark",
-        price: 249,
-      },
-      {
-        id: 11,
-        category: "Watches",
-        description: "Apple Watch Version 2. A delight.",
-        imgLink:
-          "https://images.pexels.com/photos/277406/pexels-photo-277406.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        name: "Apple v2",
-        price: 1499,
-      },
-      {
-        id: 12,
-        category: "Belts",
-        description: "Stylish formal brown belt. An office favourite.",
-        imgLink:
-          "https://as1.ftcdn.net/jpg/02/14/48/72/500_F_214487233_Aahw3DohDu6dSSfMqWCcU1QDatxpDt6E.jpg",
-        name: "Fab Brown",
-        price: 149,
-      },
-      {
-        id: 13,
-        category: "Handbags",
-        description: "Desirable travel bag. Mix of convenience and style",
-        imgLink:
-          "https://images.pexels.com/photos/2534961/pexels-photo-2534961.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        name: "Travel Lite",
-        price: 199,
-      },
-      {
-        id: 14,
-        category: "Handbags",
-        description: "3 Pockets, 2 Zips -  ideal for shopping and parties",
-        imgLink:
-          "https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        name: "Chic Leather",
-        price: 749,
-      },
-      {
-        id: 15,
-        category: "Belts",
-        description: "Signature belt from Gucci ",
-        imgLink:
-          "https://img.shopstyle-cdn.com/pim/c7/a6/c7a695a8db5a375b222f15bea045bdea_xlarge.jpg",
-        name: "Raw Edge",
-        price: 799,
-      },
-      {
-        id: 16,
-        category: "Belts",
-        description: "Iconic metallic belt",
-        imgLink:
-          "https://img.shopstyle-cdn.com/pim/81/78/8178fa6c3b27d3f3e0fe18d019c992ea_xlarge.jpg",
-        name: "Goofy Black",
-        price: 349,
-      },
-      {
-        id: 17,
-        category: "Sunglasses",
-        description: "Min black faded front shades",
-        imgLink:
-          "https://cdn.shopify.com/s/files/1/0898/5824/products/QUAY_HIGHKEY_Mini_BLACK_FADE_FRONT_450x.jpg",
-        name: "Quay Shades",
-        price: 479,
-      },
-      {
-        id: 18,
-        category: "Belts",
-        description: "Evergreen formal belt with classic buckle",
-        imgLink:
-          "https://as1.ftcdn.net/jpg/02/02/45/86/500_F_202458696_CYlcJbJfjgUb2VgQnPSUxHU79v6I3SC6.jpg",
-        name: "Classic Brown",
-        price: 128,
-      },
-      {
-        id: 19,
-        category: "Handbags",
-        description: "Beach handbag to go along with a beach holiday",
-        imgLink:
-          "https://images.pexels.com/photos/2305000/pexels-photo-2305000.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-        name: "Funky Jute",
-        price: 99,
-      },
+//     let productsArr = [
+//       {
+//         id: 1,
+//         category: "Watches",
+//         description:
+//           "The look that made Swiss watches the toast of the world. Still unbeatable.",
+//         imgLink:
+//           "https://images.pexels.com/photos/125779/pexels-photo-125779.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+//         name: "Silver",
+//         price: 1600,
+//       },
+//       {
+//         id: 2,
+//         category: "Watches",
+//         description: "Dark, black beauty. Sure to look good on the wrist.",
+//         imgLink:
+//           "https://images.pexels.com/photos/1697566/pexels-photo-1697566.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//         name: "Black",
+//         price: 899,
+//       },
+//       {
+//         id: 3,
+//         category: "Watches",
+//         description:
+//           "Multi chronographs, stop watch, timers. Altimeter. What else.",
+//         imgLink:
+//           "https://images.pexels.com/photos/2113994/pexels id-photo-2113994.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//         name: "Chronograph",
+//         price: 1199,
+//       },
+//       {
+//         id: 4,
+//         category: "Watches",
+//         description: "For all ages. For all times. Classic Look. Classic leather.",
+//         imgLink:
+//           "https://images.pexels.com/photos/236915/pexels-photo-236915.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//         name: "Classic",
+//         price: 1250,
+//       },
+//       {
+//         id: 5,
+//         category: "Watches",
+//         description: "The original Apple Watch. Still a great buy.",
+//         imgLink:
+//           "https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+//         name: "Apple v1",
+//         price: 999,
+//       },
+//       {
+//         id: 6,
+//         category: "Watches",
+//         description: "Mechanical 28 jewelled watch. Connoisseur delight.",
+//         imgLink:
+//           "https://images.pexels.com/photos/47339/mechanics-movement-feinmechanik-wrist-watch-47339.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//         name: "Jewelled",
+//         price: 1999,
+//       },
+//       {
+//         id: 7,
+//         category: "Sunglasses",
+//         description: "Desirable, reddish tint. Sure to attract attention.",
+//         imgLink:
+//           "https://images.pexels.com/photos/46710/pexels-photo-46710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//         name: "Tinted Red",
+//         price: 399,
+//       },
+//       {
+//         id: 8,
+//         category: "Sunglasses",
+//         description: "Nostalgic, bluish tint, sure to get memories back. Vintage.",
+//         imgLink:
+//           "https://images.pexels.com/photos/701877/pexels-photo-701877.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//         name: "Oldies",
+//         price: 199,
+//       },
+//       {
+//         id: 9,
+//         category: "Sunglasses",
+//         description: "Trendy, young sunglasses with retro look. Teen favourite.",
+//         imgLink:
+//           "https://images.pexels.com/photos/1362558/pexels-photo-1362558.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+//         name: "Youthful",
+//         price: 219,
+//       },
+//       {
+//         id: 10,
+//         category: "Sunglasses",
+//         description: "Chic sunglasses. Classic dark shades, sure to generate envy.",
+//         imgLink:
+//           "https://images.pexels.com/photos/65659/glasses-glass-circle-light-transmittance-65659.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//         name: "Classic Dark",
+//         price: 249,
+//       },
+//       {
+//         id: 11,
+//         category: "Watches",
+//         description: "Apple Watch Version 2. A delight.",
+//         imgLink:
+//           "https://images.pexels.com/photos/277406/pexels-photo-277406.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+//         name: "Apple v2",
+//         price: 1499,
+//       },
+//       {
+//         id: 12,
+//         category: "Belts",
+//         description: "Stylish formal brown belt. An office favourite.",
+//         imgLink:
+//           "https://as1.ftcdn.net/jpg/02/14/48/72/500_F_214487233_Aahw3DohDu6dSSfMqWCcU1QDatxpDt6E.jpg",
+//         name: "Fab Brown",
+//         price: 149,
+//       },
+//       {
+//         id: 13,
+//         category: "Handbags",
+//         description: "Desirable travel bag. Mix of convenience and style",
+//         imgLink:
+//           "https://images.pexels.com/photos/2534961/pexels-photo-2534961.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+//         name: "Travel Lite",
+//         price: 199,
+//       },
+//       {
+//         id: 14,
+//         category: "Handbags",
+//         description: "3 Pockets, 2 Zips -  ideal for shopping and parties",
+//         imgLink:
+//           "https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+//         name: "Chic Leather",
+//         price: 749,
+//       },
+//       {
+//         id: 15,
+//         category: "Belts",
+//         description: "Signature belt from Gucci ",
+//         imgLink:
+//           "https://img.shopstyle-cdn.com/pim/c7/a6/c7a695a8db5a375b222f15bea045bdea_xlarge.jpg",
+//         name: "Raw Edge",
+//         price: 799,
+//       },
+//       {
+//         id: 16,
+//         category: "Belts",
+//         description: "Iconic metallic belt",
+//         imgLink:
+//           "https://img.shopstyle-cdn.com/pim/81/78/8178fa6c3b27d3f3e0fe18d019c992ea_xlarge.jpg",
+//         name: "Goofy Black",
+//         price: 349,
+//       },
+//       {
+//         id: 17,
+//         category: "Sunglasses",
+//         description: "Min black faded front shades",
+//         imgLink:
+//           "https://cdn.shopify.com/s/files/1/0898/5824/products/QUAY_HIGHKEY_Mini_BLACK_FADE_FRONT_450x.jpg",
+//         name: "Quay Shades",
+//         price: 479,
+//       },
+//       {
+//         id: 18,
+//         category: "Belts",
+//         description: "Evergreen formal belt with classic buckle",
+//         imgLink:
+//           "https://as1.ftcdn.net/jpg/02/02/45/86/500_F_202458696_CYlcJbJfjgUb2VgQnPSUxHU79v6I3SC6.jpg",
+//         name: "Classic Brown",
+//         price: 128,
+//       },
+//       {
+//         id: 19,
+//         category: "Handbags",
+//         description: "Beach handbag to go along with a beach holiday",
+//         imgLink:
+//           "https://images.pexels.com/photos/2305000/pexels-photo-2305000.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+//         name: "Funky Jute",
+//         price: 99,
+//       },
       
-    ];
+//     ];
     
     
     
-    let customers=[
-      {name:"Jack",email:"email@Test.com",password:"test1234",id:1}
-    ]
+//     let customers=[
+//       {name:"Jack",email:"email@Test.com",password:"test1234",id:1}
+//     ]
     
-    let orders=[
-      {name:"Charu Sharma",address:"Building no 28, Sector 140",city:"Gurgaon",amount:2197,items:3}
-    ]
+//     let orders=[
+//       {name:"Charu Sharma",address:"Building no 28, Sector 140",city:"Gurgaon",amount:2197,items:3}
+//     ]
     
     
     
-    app.post("/login", function(req, res) {
-    let {email,password}=req.body
+//     app.post("/login", function(req, res) {
+//     let {email,password}=req.body
     
-      let cust = customers.find(function(item) {
-        return item.email === email && item.password === password;
-      });
-      console.log(cust);
-      var custRec= {
-        name: cust.name,
-        email:cust.email
-      }
-      console.log(custRec);
+//       let cust = customers.find(function(item) {
+//         return item.email === email && item.password === password;
+//       });
+//       console.log(cust);
+//       var custRec= {
+//         name: cust.name,
+//         email:cust.email
+//       }
+//       console.log(custRec);
      
-      res.send(custRec);
-    });
+//       res.send(custRec);
+//     });
     
-    app.get("/orders",function(req,res){
-    res.send(orders)
-    })
-    app.post("/orders", (req, res) => {
-      let newOrder = req.body;
-      newOrder.id = orders.length + 1;
-      orders.push(newOrder);
-      res.send(newOrder)
-      console.log(newOrder, "ghjk");
-    });
+//     app.get("/orders",function(req,res){
+//     res.send(orders)
+//     })
+//     app.post("/orders", (req, res) => {
+//       let newOrder = req.body;
+//       newOrder.id = orders.length + 1;
+//       orders.push(newOrder);
+//       res.send(newOrder)
+//       console.log(newOrder, "ghjk");
+//     });
     
     
-    app.get("/products/:category?", (req, res) => {
-      const { category } = req.params;
-      const filteredProducts = category
-        ? productsArr.filter((product) => product.category === category)
-        : productsArr;
+//     app.get("/products/:category?", (req, res) => {
+//       const { category } = req.params;
+//       const filteredProducts = category
+//         ? productsArr.filter((product) => product.category === category)
+//         : productsArr;
     
-      res.json(filteredProducts);
-    });
+//       res.json(filteredProducts);
+//     });
     
-    app.get("/product/:id", (req, res) => {
-      const { id } = req.params;
-      const findProduct = productsArr.find((product) => product.id === +id);
+//     app.get("/product/:id", (req, res) => {
+//       const { id } = req.params;
+//       const findProduct = productsArr.find((product) => product.id === +id);
     
-      res.json(findProduct);
-    });
+//       res.json(findProduct);
+//     });
     
-    app.post("/products", (req, res) => {
-      let newProduct = req.body;
-      newProduct.id = productsArr.length + 1;
-      productsArr.push(newProduct);
-      res.send(newProduct), console.log(newProduct, "ghjk");
-    });
+//     app.post("/products", (req, res) => {
+//       let newProduct = req.body;
+//       newProduct.id = productsArr.length + 1;
+//       productsArr.push(newProduct);
+//       res.send(newProduct), console.log(newProduct, "ghjk");
+//     });
     
-    app.put('/products/:id', (req, res) => {
-        const updatedProduct= req.body;
-        const {id} = req.params
-        const index = productsArr.findIndex((product) => product.id === +id);
+//     app.put('/products/:id', (req, res) => {
+//         const updatedProduct= req.body;
+//         const {id} = req.params
+//         const index = productsArr.findIndex((product) => product.id === +id);
       
-        if (index >= 0) {
-          productsArr[index] = { ...productsArr[index], ...updatedProduct };
+//         if (index >= 0) {
+//           productsArr[index] = { ...productsArr[index], ...updatedProduct };
          
-          res.send(productsArr[index]);
+//           res.send(productsArr[index]);
         
-        } else {
-          res.status(404).send("Product not found");
-        }
+//         } else {
+//           res.status(404).send("Product not found");
+//         }
        
-      });
+//       });
     
-      app.get("/products", (req, res) => {
+      
+//       app.get("/products", (req, res) => {
 
-        res.send(productsArr)
+//         res.send(productsArr)
       
        
-      });
-      app.delete("/products/:id", function (req, res) {
-        let id = req.params.id;
+//       });
+//       app.delete("/products/:id", function (req, res) {
+//         let id = req.params.id;
         
-        let index = productsArr.findIndex((obj1) => obj1.id === +id);
-        if (index >= 0) {
-          let product = productsArr.splice(index, 1);
-          res.send(product);
-          console.log(product);
-        }
-      else   res.status(404).send("Product not found");
-      });
+//         let index = productsArr.findIndex((obj1) => obj1.id === +id);
+//         if (index >= 0) {
+//           let product = productsArr.splice(index, 1);
+//           res.send(product);
+//           console.log(product);
+//         }
+//       else   res.status(404).send("Product not found");
+//       });
     
     
-      let furnitureUsers = [
-  { email: "user@user.com", password: "user1234", role: "user" },
-  { email: "admin@admin.com", password: "admin1234", role: "admin" },
+//       let furnitureUsers = [
+//   { email: "user@user.com", password: "user1234", role: "user" },
+//   { email: "admin@admin.com", password: "admin1234", role: "admin" },
+// ];
+
+
+// app.post("/login", function(req, res) {
+//   let {email,password}=req.body
+  
+//     let cust = customers.find(function(item) {
+//       return item.email === email && item.password === password;
+//     });
+//     console.log(cust);
+//     var custRec= {
+//       name: cust.name,
+//       email:cust.email
+//     }
+//     console.log(custRec);
+   
+//     res.send(custRec);
+//   });
+
+customers = [
+  {
+    custId: 1,
+    name: "ABC",
+    password: "abc1234",
+    role: "admin",
+    email: "abc@gmail.com"
+  },
+  {
+    custId: 2,
+    name: "Willie",
+    password: "willie1234",
+    role: "student",
+    email: "willie@gmail.com"
+  },
+  {
+    custId: 3,
+    name: "Jack",
+    password: "jack1234",
+    role: "faculty",
+    email: "jack@gmail.com"
+  },
+  {
+    custId: 4,
+    name: "James",
+    password: "james1234",
+    role: "student",
+    email: "james@gmail.com"
+  },
+  {
+    custId: 5,
+    name: "Harry",
+    password: "harry1234",
+    role: "faculty",
+    email: "harry@gmail.com"
+  },
+  {
+    custId: 6,
+    name: "Tia",
+    password: "tia1234",
+    role: "student",
+    email: "tia@gmail.com"
+  },
+  {
+    custId: 7,
+    name: "Aditya",
+    password: "aditya123",
+    role: "faculty",
+    email: "aditya@gmail.com"
+  },
+  {
+    custId: 8,
+    name: "Sonu",
+    password: "sonu1234",
+    role: "student",
+    email: "sonu@gmail.com"
+  },
+  {
+    custId: 9,
+    name: "Ellie",
+    password: "ellie1234",
+    role: "student",
+    email: "ellie@gmail.com"
+  },
+  {
+    custId: 10,
+    name: "Gia",
+    password: "gia1234",
+    role: "faculty",
+    email: "gia@gmail.com"
+  }
+];
+courses = [
+  {
+    courseId: 1,
+    name: "ANGULAR",
+    code: "ANG97",
+    description: "All fundamentals of Angular 7",
+    faculty: ["Daniel", "Jack"],
+    students: ["Sam"]
+  },
+  {
+    courseId: 2,
+    name: "JAVASCRIPT",
+    code: "JS124",
+    description: "Intoduction to javascript",
+    faculty: ["Aditya"],
+    students: ["James", "Joy", "Monu", "Rita"]
+  },
+  {
+    courseId: 3,
+    name: "REACT",
+    code: "RCT56",
+    description: "React Javascript library",
+    faculty: ["Jack", "Gia"],
+    students: ["Raima", "Rita", "Sonu", "James"]
+  },
+  {
+    courseId: 4,
+    name: "BOOTSTRAP",
+    code: "BS297",
+    description: "Bootstrap Designing Framework",
+    faculty: [],
+    students: ["James", "Tia", "Ellie"]
+  },
+  {
+    courseId: 5,
+    name: "CSS",
+    code: "CS365",
+    description: "Basic stylesheet language",
+    faculty: [],
+    students: ["James", "Rita", "Monica"]
+  },
+  {
+    courseId: 6,
+    name: "REST AND MICROSERVICES",
+    code: "RM392",
+    description: "Introduction to Microservices",
+    faculty: [],
+    students: ["Sam"]
+  },
+  {
+    courseId: 7,
+    name: "NODE",
+    code: "ND725",
+    description: "Introduction to Node",
+    faculty: ["Sonia"],
+    students: ["Saransh", "Shrey", "Monica"]
+  }
+];
+faculties = [
+  { id: 5, name: "Daniel", courses: ["ANGULAR"] },
+  { id: 4, name: "Sonia", courses: ["NODE"] },
+  { id: 3, name: "Jack", courses: ["REACT", "ANGULAR"] },
+  { id: 2, name: "Gia", courses: ["REACT"] },
+  { id: 1, name: "Aditya", courses: ["ANGULAR"] }
+];
+classes = [
+  {
+    classId: 1,
+    course: "REACT",
+    time: "07:45",
+    endTime: "08:45",
+    topic: "Redux",
+    facultyName: "Jack"
+  },
+  {
+    classId: 2,
+    course: "ANGULAR",
+    time: "15:45",
+    endTime: "17:40",
+    topic: "Component",
+    facultyName: "Jack"
+  },
+  {
+    classId: 3,
+    course: "JAVASCRIPT",
+    time: "15:45",
+    endTime: "17:40",
+    topic: "Component",
+    facultyName: "Aditya"
+  }
+];
+students = [
+  {
+    id: 16,
+    name: "Willie",
+    dob: "31-July-1997",
+    gender: "male",
+    about: "Pursuing Graduation",
+    courses: ["ANGULAR", "NODE"]
+  },
+  {
+    id: 15,
+    name: "Tia",
+    dob: "30-July-1997",
+    gender: "male",
+    about: "Pursuing Graduation",
+    courses: []
+  },
+  {
+    id: 14,
+    name: "Apoorv",
+    dob: "31-August-1998",
+    gender: "male",
+    about: "Want to learn new technologies",
+    courses: []
+  },
+  {
+    id: 13,
+    name: "Joy",
+    dob: "31-July-1997",
+    gender: "male",
+    about: "Pursuing Graduation",
+    courses: ["JAVASCRIPT"]
+  },
+  {
+    id: 12,
+    name: "Rachel",
+    dob: "31-August-1998",
+    gender: "female",
+    about: "Pursuing Graduation",
+    courses: []
+  },
+  {
+    id: 11,
+    name: "Monica",
+    dob: "30-July-1997",
+    gender: "female",
+    about: "Want to learn new technologies",
+    courses: ["CSS", "NODE"]
+  },
+  {
+    id: 10,
+    name: "Monu",
+    dob: "12-May-1997",
+    gender: "male",
+    about: "Pursuing Graduation",
+    courses: ["JAVASCRIPT"]
+  },
+  {
+    id: 9,
+    name: "Sonu",
+    dob: "12-May-1997",
+    gender: "male",
+    about: "Pursuing Graduation",
+    courses: ["REACT"]
+  },
+  {
+    id: 8,
+    name: "Raima",
+    dob: "30-July-1997",
+    gender: "female",
+    about: "Want to learn new technologies",
+    courses: ["REACT"]
+  },
+  {
+    id: 7,
+    name: "Rita",
+    dob: "31-August-1998",
+    gender: "female",
+    about: "Pursuing Graduation",
+    courses: ["JAVASCRIPT", "REACT", "CSS"]
+  },
+  {
+    id: 6,
+    name: "Shrey",
+    dob: "12-May-1997",
+    gender: "male",
+    about: "Pursuing Graduation",
+    courses: ["NODE"]
+  },
+  {
+    id: 5,
+    name: "Saransh",
+    dob: "31-July-1997",
+    gender: "male",
+    about: "Want to learn new technologies",
+    courses: ["NODE"]
+  },
+  {
+    id: 4,
+    name: "Sanya",
+    dob: "31-July-1997",
+    gender: "male",
+    about: "Want to learn new technologies",
+    courses: []
+  },
+  {
+    id: 3,
+    name: "James",
+    dob: "12-July-1994",
+    gender: "male",
+    about: "Pursuing Graduation",
+    courses: ["JAVASCRIPT", "BOOTSTRAP", "CSS", "REACT"]
+  },
+  {
+    id: 2,
+    name: "Sam",
+    dob: "12-July-1994",
+    gender: "male",
+    about: "Pursuing Graduation",
+    courses: ["ANGULAR", "REST AND MICROSERVICES"]
+  },
+  {
+    id: 1,
+    name: "Ellie",
+    dob: "12-June-1992",
+    gender: "female",
+    about: "Want to learn new technologies",
+    courses: ["BOOTSTRAP"]
+  }
 ];
 
 
 app.post("/login", function(req, res) {
-  let {email,password}=req.body
-  
-    let cust = customers.find(function(item) {
-      return item.email === email && item.password === password;
-    });
-    console.log(cust);
-    var custRec= {
-      name: cust.name,
-      email:cust.email
-    }
-    console.log(custRec);
-   
-    res.send(custRec);
+  var email = req.body.email;
+  var password = req.body.password;
+
+  var cust = customers.find(function(item) {
+    return item.email === email && item.password === password;
   });
+  console.log(cust);
+  var custRec= {
+    name: cust.name,
+    role: cust.role,
+    email:cust.email
+  }
+  console.log(custRec);
+ 
+  res.send(custRec);
+});
+
+app.get("/customers",function(req,res){
+res.send(customers)
+})
+
+
+
+app.post("/register", function(req, res) {
+const name = req.body.name;
+const email = req.body.email;
+const password = req.body.password;
+const role = req.body.role;
+
+if (role !== "student" && role !== "faculty") {
+  return res.status(400).json({ error: "Invalid role" });
+}
+
+let id = customers.length;
+const cust = {
+  custId: id + 1,
+  name: name,
+  email: email,
+  password: password,
+  role: role,
+};
+
+customers.unshift(cust);
+var customerRes = {
+  name: name,
+  email: email,
+  role: role,
+  custId: cust.custId,
+};
+
+if (role === "student") {
+  const student = {
+    id: students.length+1,
+    name: name,
+    dob: "",
+    gender: "",
+    about: "",
+    courses: [],
+  };
+  students.unshift(student);
+}
+
+if (role === "faculty") {
+  const faculty = {
+    id: faculties.length+1,
+    name: name,
+    courses: [],
+  };
+  faculties.unshift(faculty);
+}
+
+console.log(customers);
+res.send(customerRes);
+console.log(customerRes);
+});
+
+
+app.get('/getStudentNames', (req, res) => {
+  const studentNames = students.map(student => student.name);
+  res.send(studentNames);
+});
+
+app.get('/getFacultyNames', (req, res) => {
+  const facultyNames = faculties.map(faculty => faculty.name);
+  res.send(facultyNames);
+});
+
+
+
+app.get('/getCourses', (req, res) => {
+ res.send(courses)
+ });
+
+
+ app.get("/getCourses/:courseId", function(req, res) {
+  var courseId = +req.params.courseId;
+  console.log("courseId", courseId);
+  const courseDetails = courses.find(function(item) {
+    return item.courseId === courseId;
+  });
+  console.log(courseDetails);
+  res.send(courseDetails);
+});
+
+app.get('/getStudents', (req, res) => {
+  let courses=req.query.course;
+  let filterStudent=students
+ 
+  if (courses) {
+      const courseArr = courses.split(",");
+      filterStudent = filterStudent.filter((student) => {
+          return student.courses.some((course) => courseArr.includes(course));
+      });
+  }
+  var resArr=pagination1(filterStudent, parseInt(req.query.page))
+  res.json({
+   items: resArr,
+   page: parseInt(req.query.page),  
+   totalItems: resArr.length,
+   totalNum: filterStudent.length
+ });
+ });
+
+
+
+
+ app.get('/getFaculties', (req, res) => {
+
+  let courses=req.query.course;
+  let filterFaculty=faculties
+ 
+  if (courses) {
+      const courseArr = courses.split(",");
+      filterFaculty = filterFaculty.filter((student) => {
+          return student.courses.some((course) => courseArr.includes(course));
+      });
+  }
+
+  var resArr=pagination1(filterFaculty, parseInt(req.query.page))
+  res.json({
+   items: resArr,
+   page: parseInt(req.query.page),  
+   totalItems: resArr.length,
+   totalNum: filterFaculty.length
+ });
+ });
+
+app.put('/putCourse', (req, res) => {
+console.log("Put called");
+const updatedCourse = req.body;
+const courseId = updatedCourse.courseId;
+const index = courses.findIndex((course) => course.courseId === courseId);
+
+if (index >= 0) {
+  courses[index] = { ...courses[index], ...updatedCourse };
+  if (updatedCourse.faculty) {
+    faculties.forEach((faculty) => {
+      if (faculty.courses.includes(updatedCourse.name)) {
+        faculty.courses = faculty.courses.filter(course => course !== updatedCourse.name);
+      }
+    });
+    updatedCourse.faculty.forEach(facultyName => {
+      const faculty = faculties.find(f => f.name === facultyName);
+      if (faculty) {
+        faculty.courses.push(updatedCourse.name);
+      }
+    });
+  }
+
+ 
+  students.forEach((student) => {
+    if (student.courses.includes(updatedCourse.name)) {
+      student.courses = student.courses.filter(course => course !== updatedCourse.name);
+    }
+  });
+  updatedCourse.students.forEach(studentName => {
+    const student = students.find(s => s.name === studentName);
+    if (student) {
+      student.courses.push(updatedCourse.name);
+    }
+  });
+  
+
+  res.send(courses[index]);
+} else {
+  res.status(404).send("Course not found");
+}
+console.log(updatedCourse, 'updated');
+});
+
+
+
+app.get("/getStudentDetails/:name",(req,res)=>{
+let studentName=req.params.name
+let studentDetails=students.find(st=>st.name===studentName)
+console.log(studentDetails);
+res.send(studentDetails)
+})
+
+
+app.get("/getStudentCourse/:name", (req, res) => {
+const studentName = req.params.name;
+const courseDetails = courses.filter(course => course.students.includes(studentName));
+console.log(courseDetails);
+res.send(courseDetails);
+});
+
+app.get("/getStudentClass/:name", (req, res) => {
+let studentName = req.params.name; 
+let student = students.find(student => student.name === studentName);
+if (student) {
+  let studentCourses = student.courses;
+  let studentClasses = classes.filter(cls => studentCourses.includes(cls.course));
+  res.json(studentClasses);
+} else {
+  res.status(404).json({ error: "Student not found" });
+}
+});
+
+
+
+
+
+app.post("/postStudentDetails/:name", (req, res) => {
+const studentName = req.params.name; 
+const updatedStudentData = req.body;
+const student = students.find((student) => student.name === studentName);
+
+if (!student) {
+  return res.status(404).json({ message: "Student not found" });
+}
+student.name = updatedStudentData.name;
+student.dob = updatedStudentData.dob;
+student.gender = updatedStudentData.gender;
+student.about = updatedStudentData.about;
+student.courses = updatedStudentData.courses;
+student.id=updatedStudentData.id
+return res.status(200).json({ message: "Student details updated successfully", student });
+});
+
+app.get("/getFacultyCourse/:name", (req, res) => {
+const facultyName = req.params.name;
+const courseDetails = courses.filter(course => course.faculty.includes(facultyName));
+console.log(courseDetails);
+res.send(courseDetails);
+});
+
+
+app.get("/getFacultyClass/:name", (req, res) => {
+let facultyNames = req.params.name; 
+let classesArr=classes.filter(cl=>cl.facultyName===facultyNames)
+res.send(classesArr)
+});
+
+
+app.post("/postClass",(req,res)=>{
+let newClass=req.body;
+newClass.classId=classes.length+1;
+classes.push(newClass);
+res.send(classes),
+console.log(newClass,'ghjk');
+})
+
+app.put("/postClass/:id",(req,res)=>{
+let classId=+req.params.id;
+const class1 = req.body;
+let index=classes.findIndex((obj1)=>obj1.classId===classId)
+if(index>=0){
+classes[index]=class1
+let updateClass={
+  classId:class1.classId,
+  topic:class1.topic,
+  time:class1.time,
+  endTime:class1.endTime,
+  courses:class1.courses,
+  facultyName:class1.facultyName
+}
+res.send(updateClass)
+console.log(class1,'gfhjk');
+}else{
+res.send('Not Found')
+}
+})
+
+
+function pagination1(obj, page) {
+ 
+  var resArr = obj;
+  resArr = resArr.slice(page * 3 - 3, page * 3);
+  return resArr;
+}
+app.listen(port, () => console.log(`Node app listening on port ${port}!`));
